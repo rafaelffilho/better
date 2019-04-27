@@ -4,8 +4,7 @@ import time
 import sys
 import os
 
-init()																		# start colorama
-
+init()
 
 base_bet = float(input("Enter the base bet: ").replace("\n", ""))
 curr_bet = float(base_bet)
@@ -37,9 +36,9 @@ except Exception as e:
     pass
 input()
 
-curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(",", ".")
+curr_money = driver.find_element_by_css_selector("span.u-hl-gold")
 
-initial_money = float(curr_money)
+initial_money = curr_money
 
 while True:
     time.sleep(1)
@@ -70,7 +69,7 @@ while True:
         except Exception as identifier:
             pass
 
-        buf = float(driver.find_element_by_css_selector("span.u-hl-gold").text.replace(",", "."))
+        buf = driver.find_element_by_css_selector("span.u-hl-gold").text
         if (buf >= curr_money):
             curr_bet = float(base_bet)
             loses = 0
@@ -89,7 +88,7 @@ while True:
             driver.refresh()
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
-        print("Total profit for the session: ", float(curr_money) - initial_money)
+        print("Total profit for the session: ", curr_money - initial_money)
         print("Finished bet")
         print("--------------------------------------------------------------------------------")
         continue
