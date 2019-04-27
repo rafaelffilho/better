@@ -2,9 +2,12 @@ from selenium import webdriver
 import time
 import sys
 import os
+from colorama import Fore, init
 
 # Bet buttons class are
 # ct & t
+
+init()																		# start colorama
 
 base_bet = float(sys.argv[1])
 curr_bet = float(base_bet)
@@ -33,6 +36,8 @@ while True:
 		driver.find_element_by_css_selector("button.c-radio-group__item:nth-child(1)").click()
 		driver.find_element_by_class_name("bet-amount").send_keys(str(curr_bet))
 		driver.find_element_by_class_name(sys.argv[2]).click()
+		print("\n--------------------------------------------------------------------------------")
+		print(Fore.YELLOW + "Betted " +  curr_bet + " on " + sys.argv[2])
 
 		t = driver.find_element_by_css_selector(".rolling-overlay__time > span:nth-child(1)").text
 
@@ -50,9 +55,11 @@ while True:
 		if (buf >= curr_money):
 			curr_bet = float(base_bet)
 			loses = 0
+			print(Fore.GREEN + "Win")
 		else:
 			curr_bet = float(float(curr_bet) * 2)
 			loses = loses + 1
+			print(Fore.RED + "Lose")
 		if (loses >= 6):
 			loses = 0
 			curr_bet = float(base_bet)
@@ -63,6 +70,8 @@ while True:
 		if(bet_count >= 5):
 			driver.refresh()
 			bet_count = 0
+		print(Fore.BLUE + "Current balance: " + curr_money)
+		print("--------------------------------------------------------------------------------")
 		continue
 
 	except Exception as identifier:
@@ -71,3 +80,4 @@ while True:
 # Wait time for next roll is 19 sec
 
 #time.sleep(10)
+
