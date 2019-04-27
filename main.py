@@ -71,13 +71,13 @@ while True:
 
         buf = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(',', '.')
         if (buf >= curr_money):
+            print(Fore.GREEN + "Won " + str(curr_bet) + Fore.RESET)
             curr_bet = float(base_bet)
             loses = 0
-            print(Fore.GREEN + "Won " + str(curr_bet) + Fore.RESET)
         else:
+            print(Fore.RED + "Lost" + str(curr_bet) + Fore.RESET)
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
-            print(Fore.RED + "Lost" + str(curr_bet) + Fore.RESET)
         if (loses >= 6):
             loses = 0
             curr_bet = float(base_bet)
@@ -89,7 +89,7 @@ while True:
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
         print("Finished bet")
-        print("Total profit: ", str(float(curr_money) - init_balance))
+        print("Total profit: %.2f" % float(curr_money) - init_balance)
         print("--------------------------------------------------------------------------------")
         continue
 
