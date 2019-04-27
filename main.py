@@ -38,6 +38,8 @@ input()
 
 curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text
 
+init_balance = float(curr_money)
+
 while True:
     time.sleep(1)
     try:
@@ -71,11 +73,11 @@ while True:
         if (buf >= curr_money):
             curr_bet = float(base_bet)
             loses = 0
-            print(Fore.GREEN + "Won " + curr_bet + Fore.RESET)
+            print(Fore.GREEN + "Won " + str(curr_bet) + Fore.RESET)
         else:
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
-            print(Fore.RED + "Lost" + curr_bet + Fore.RESET)
+            print(Fore.RED + "Lost" + str(curr_bet) + Fore.RESET)
         if (loses >= 6):
             loses = 0
             curr_bet = float(base_bet)
@@ -87,6 +89,7 @@ while True:
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
         print("Finished bet")
+        print("Total profit: ", str(float(curr_money) - init_balance))
         print("--------------------------------------------------------------------------------")
         continue
 
