@@ -9,8 +9,14 @@ from colorama import Fore, init
 
 init()																		# start colorama
 
-base_bet = float(sys.argv[1])
+
+base_bet = float(input("Enter the base bet: "))
 curr_bet = float(base_bet)
+
+side = "null"
+
+while(side != "ct" or side != "t"):
+	side = input("Choose your side [ct/t] ")
 
 bet_count = 0
 curr_money = 0
@@ -18,10 +24,16 @@ loses = 0
 
 driver = webdriver.Firefox()
 driver.get("https://csgoempire.com/")
+
+usr_info = open("user_info.txt", "r")
+usr_name = usr_info.readline()
+usr_pass = usr_info.readline()
+usr_info.close()
+
 try:
 	driver.find_element_by_class_name("c-nav-buttons__login").click()
-	driver.find_element_by_name("username").send_keys("bizarrinhogames")
-	driver.find_element_by_name("password").send_keys("%Bc^8p1VTgQo7V1AU56hS$2ZB1yIlv1@*&o")
+	driver.find_element_by_name("username").send_keys(usr_name)
+	driver.find_element_by_name("password").send_keys(usr_pass)
 except Exception as e:
 	pass
 input()
@@ -35,9 +47,9 @@ while True:
 
 		driver.find_element_by_css_selector("button.c-radio-group__item:nth-child(1)").click()
 		driver.find_element_by_class_name("bet-amount").send_keys(str(curr_bet))
-		driver.find_element_by_class_name(sys.argv[2]).click()
+		driver.find_element_by_class_name(side).click()
 		print("\n--------------------------------------------------------------------------------")
-		print(Fore.YELLOW + "Betted " +  str(curr_bet) + " on " + str(sys.argv[2]) + Fore.RESET)
+		print(Fore.YELLOW + "Betted " +  str(curr_bet) + " on " + str(side) + Fore.RESET)
 
 		t = driver.find_element_by_css_selector(".rolling-overlay__time > span:nth-child(1)").text
 		t = int(t) + 10
@@ -70,7 +82,7 @@ while True:
 		if(bet_count >= 5):
 			driver.refresh()
 			bet_count = 0
-		print("Current balance: " + Fore.BLUE + str(curr_money) + Fore.RESET)
+		print("Current balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
 		print("--------------------------------------------------------------------------------")
 		continue
 
