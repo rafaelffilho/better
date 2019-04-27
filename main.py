@@ -75,7 +75,7 @@ while True:
             curr_bet = float(base_bet)
             loses = 0
         else:
-            print(Fore.RED + "Lost" + str(curr_bet) + Fore.RESET)
+            print(Fore.RED + "Lost " + str(curr_bet) + Fore.RESET)
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
         if (loses >= 6):
