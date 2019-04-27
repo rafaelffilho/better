@@ -1,8 +1,8 @@
-#Better
+# Better
 
-##Requirements to run:
+## Requirements to run:
 
--Python
--Pip
--selenium
--colorama
+- Python
+- Pip
+- selenium
+- colorama
