@@ -36,7 +36,7 @@ except Exception as e:
     pass
 input()
 
-curr_money = driver.find_element_by_css_selector("span.u-hl-gold")
+curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text
 
 initial_money = curr_money
 
@@ -88,7 +88,7 @@ while True:
             driver.refresh()
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
-        print("Total profit for the session: ", curr_money - initial_money)
+        print("Total profit for the session: ", float(curr_money) - initial_money)
         print("Finished bet")
         print("--------------------------------------------------------------------------------")
         continue
