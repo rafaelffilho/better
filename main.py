@@ -91,4 +91,5 @@ while True:
         continue
 
     except Exception as identifier:
+        print("Exception: ", str(identifier))
         continue
