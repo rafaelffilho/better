@@ -9,8 +9,14 @@ from colorama import Fore, init
 
 init()																		# start colorama
 
-base_bet = float(sys.argv[1])
+
+base_bet = float(input(Fore.YELLOW + "Enter the base bet: " + Fore.RESET))
 curr_bet = float(base_bet)
+
+side = "null"
+
+while(side != "ct" or side != "t"):
+	side = input(Fore.YELLOW + "Choose your side [ct/t] " + Fore.RESET)
 
 bet_count = 0
 curr_money = 0
@@ -35,9 +41,9 @@ while True:
 
 		driver.find_element_by_css_selector("button.c-radio-group__item:nth-child(1)").click()
 		driver.find_element_by_class_name("bet-amount").send_keys(str(curr_bet))
-		driver.find_element_by_class_name(sys.argv[2]).click()
+		driver.find_element_by_class_name(side).click()
 		print("\n--------------------------------------------------------------------------------")
-		print(Fore.YELLOW + "Betted " +  str(curr_bet) + " on " + str(sys.argv[2]) + Fore.RESET)
+		print(Fore.YELLOW + "Betted " +  str(curr_bet) + " on " + str(side) + Fore.RESET)
 
 		t = driver.find_element_by_css_selector(".rolling-overlay__time > span:nth-child(1)").text
 		t = int(t) + 10
