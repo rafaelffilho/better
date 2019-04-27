@@ -89,7 +89,7 @@ while True:
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
         print("Finished bet")
-        print("Total profit: %.2f" % float(curr_money) - float(init_balance))
+        print("Total profit: %.2f" % float(float(curr_money) - float(init_balance)))
         print("--------------------------------------------------------------------------------")
         continue
 
