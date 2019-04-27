@@ -12,8 +12,7 @@ curr_bet = float(base_bet)
 
 side = "null"
 
-while(side != "ct" or side != "t"):
-    side = input("Choose your side [ct/t] ").replace("\n", "")
+side = input("Choose your side [ct/t] ").replace("\n", "")
 
 bet_count = 0
 curr_money = 0
