@@ -70,7 +70,7 @@ while True:
 		if(bet_count >= 5):
 			driver.refresh()
 			bet_count = 0
-		print("Current balance: " + Fore.BLUE + str(curr_money) + Fore.RESET)
+		print("Current balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
 		print("--------------------------------------------------------------------------------")
 		continue
 
