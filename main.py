@@ -36,9 +36,7 @@ except Exception as e:
     pass
 input()
 
-curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(',', '.')
-
-initial_money = float(curr_money)
+curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text
 
 while True:
     time.sleep(1)
@@ -69,16 +67,15 @@ while True:
         except Exception as identifier:
             pass
 
-        buf = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(',', '.')
-        buf = float(buf)
+        buf = driver.find_element_by_css_selector("span.u-hl-gold").text
         if (buf >= curr_money):
             curr_bet = float(base_bet)
             loses = 0
-            print(Fore.GREEN + "Won " + str(float(buf) - curr_money) + Fore.RESET)
+            print(Fore.GREEN + "Won " + curr_bet + Fore.RESET)
         else:
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
-            print(Fore.RED + "Lost" + str(float(buf) - curr_money) + Fore.RESET)
+            print(Fore.RED + "Lost" + curr_bet + Fore.RESET)
         if (loses >= 6):
             loses = 0
             curr_bet = float(base_bet)
@@ -89,7 +86,6 @@ while True:
             driver.refresh()
             bet_count = 0
         print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
-        print("Total profit for the session: ", float(curr_money) - initial_money)
         print("Finished bet")
         print("--------------------------------------------------------------------------------")
         continue
