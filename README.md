@@ -1,8 +1,10 @@
 # Better
 
+A simple bot to automatic bet on CSGOEmpire based on a simples logic
+
 ## Requirements to run:
 
-- Python
-- Pip
-- selenium
-- colorama
+- python
+  - pip
+    - selenium
+    - colorama
