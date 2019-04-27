@@ -37,13 +37,13 @@ while True:
 		driver.find_element_by_class_name("bet-amount").send_keys(str(curr_bet))
 		driver.find_element_by_class_name(sys.argv[2]).click()
 		print("\n--------------------------------------------------------------------------------")
-		print(Fore.YELLOW + "Betted " +  curr_bet + " on " + sys.argv[2])
+		print(Fore.YELLOW + "Betted " +  str(curr_bet) + " on " + str(sys.argv[2]) + Fore.RESET)
 
 		t = driver.find_element_by_css_selector(".rolling-overlay__time > span:nth-child(1)").text
+		t = int(t) + 10
+		print("Waiting to roll - ", t)
 
-		print("waiting to roll - ", t)
-
-		time.sleep(int(t) + 10)
+		time.sleep(t)
 
 		try:
 			driver.find_element_by_css_selector("div.popup:nth-child(9) > p:nth-child(5) > label:nth-child(1) > i:nth-child(2)").click()
@@ -55,22 +55,22 @@ while True:
 		if (buf >= curr_money):
 			curr_bet = float(base_bet)
 			loses = 0
-			print(Fore.GREEN + "Win")
+			print(Fore.GREEN + "Win" + Fore.RESET)
 		else:
 			curr_bet = float(float(curr_bet) * 2)
 			loses = loses + 1
-			print(Fore.RED + "Lose")
+			print(Fore.RED + "Lose" + Fore.RESET)
 		if (loses >= 6):
 			loses = 0
 			curr_bet = float(base_bet)
 		curr_money = buf
 		print("Finished")
 		bet_count += 1
-		print("Beted times ", bet_count)
+		print("Betted times ", str(bet_count))
 		if(bet_count >= 5):
 			driver.refresh()
 			bet_count = 0
-		print(Fore.BLUE + "Current balance: " + curr_money)
+		print("Current balance: " + Fore.BLUE + str(curr_money) + Fore.RESET)
 		print("--------------------------------------------------------------------------------")
 		continue
 
