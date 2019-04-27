@@ -39,7 +39,7 @@ input()
 
 curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text
 
-initial_money = float(curr_money)
+initial_money = float(curr_money.replace(",", "."))
 
 while True:
     time.sleep(1)
