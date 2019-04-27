@@ -10,13 +10,13 @@ from colorama import Fore, init
 init()																		# start colorama
 
 
-base_bet = float(input(Fore.YELLOW + "Enter the base bet: " + Fore.RESET))
+base_bet = float(input("Enter the base bet: "))
 curr_bet = float(base_bet)
 
 side = "null"
 
 while(side != "ct" or side != "t"):
-	side = input(Fore.YELLOW + "Choose your side [ct/t] " + Fore.RESET)
+	side = input("Choose your side [ct/t] ")
 
 bet_count = 0
 curr_money = 0
@@ -24,10 +24,16 @@ loses = 0
 
 driver = webdriver.Firefox()
 driver.get("https://csgoempire.com/")
+
+usr_info = open("user_info.txt", "r")
+usr_name = usr_info.readline()
+usr_pass = usr_info.readline()
+usr_info.close()
+
 try:
 	driver.find_element_by_class_name("c-nav-buttons__login").click()
-	driver.find_element_by_name("username").send_keys("bizarrinhogames")
-	driver.find_element_by_name("password").send_keys("%Bc^8p1VTgQo7V1AU56hS$2ZB1yIlv1@*&o")
+	driver.find_element_by_name("username").send_keys(usr_name)
+	driver.find_element_by_name("password").send_keys(usr_pass)
 except Exception as e:
 	pass
 input()
