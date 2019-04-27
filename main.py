@@ -50,13 +50,13 @@ while True:
             "bet-amount").send_keys(str(curr_bet))
         driver.find_element_by_class_name(side).click()
         print("\n--------------------------------------------------------------------------------")
-        print(Fore.YELLOW + "Betted " + str(curr_bet) +
+        print(Fore.YELLOW + "Betting " + str(curr_bet) +
               " on " + str(side) + Fore.RESET)
 
         t = driver.find_element_by_css_selector(
             ".rolling-overlay__time > span:nth-child(1)").text
         t = int(t) + 10
-        print("Waiting to roll - ", t)
+        print("Waiting ", t, " seconds to roll")
 
         time.sleep(t)
 
@@ -72,22 +72,22 @@ while True:
         if (buf >= curr_money):
             curr_bet = float(base_bet)
             loses = 0
-            print(Fore.GREEN + "Win" + Fore.RESET)
+            print(Fore.GREEN + "Won " + str(float(buf) - curr_money) + Fore.RESET)
         else:
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
-            print(Fore.RED + "Lose" + Fore.RESET)
+            print(Fore.RED + "Lost" + str(float(buf) - curr_money) + Fore.RESET)
         if (loses >= 6):
             loses = 0
             curr_bet = float(base_bet)
         curr_money = buf
-        print("Finished")
         bet_count += 1
-        print("Betted times ", str(bet_count))
+        print("Refreshing in ", str(5 - bet_count), " bets")
         if(bet_count >= 5):
             driver.refresh()
             bet_count = 0
-        print("Current balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
+        print("Balance: " + Fore.YELLOW + str(curr_money) + Fore.RESET)
+        print("Finished bet")
         print("--------------------------------------------------------------------------------")
         continue
 
