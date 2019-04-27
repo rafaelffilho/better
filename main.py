@@ -1,22 +1,19 @@
 from selenium import webdriver
+from colorama import Fore, init
 import time
 import sys
 import os
-from colorama import Fore, init
-
-# Bet buttons class are
-# ct & t
 
 init()																		# start colorama
 
 
-base_bet = float(input("Enter the base bet: "))
+base_bet = float(input("Enter the base bet: ").replace("\n", ""))
 curr_bet = float(base_bet)
 
 side = "null"
 
 while(side != "ct" or side != "t"):
-	side = input("Choose your side [ct/t] ")
+	side = input("Choose your side [ct/t] ").replace("\n", "")
 
 bet_count = 0
 curr_money = 0
@@ -25,10 +22,13 @@ loses = 0
 driver = webdriver.Firefox()
 driver.get("https://csgoempire.com/")
 
-usr_info = open("user_info.txt", "r")
-usr_name = usr_info.readline()
-usr_pass = usr_info.readline()
-usr_info.close()
+usr_name = ""
+usr_pass = ""
+
+with open("user_info.txt", "r") as usr_info:
+	usr_name = str(usr_info.readline()).replace("\n", "")
+	usr_pass = str(usr_info.readline()).replace("\n", "")
+
 
 try:
 	driver.find_element_by_class_name("c-nav-buttons__login").click()
@@ -88,8 +88,3 @@ while True:
 
 	except Exception as identifier:
 		continue
-
-# Wait time for next roll is 19 sec
-
-#time.sleep(10)
-
