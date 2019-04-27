@@ -36,7 +36,7 @@ except Exception as e:
     pass
 input()
 
-curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text
+curr_money = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(',', '.')
 
 init_balance = float(curr_money)
 
@@ -69,7 +69,7 @@ while True:
         except Exception as identifier:
             pass
 
-        buf = driver.find_element_by_css_selector("span.u-hl-gold").text
+        buf = driver.find_element_by_css_selector("span.u-hl-gold").text.replace(',', '.')
         if (buf >= curr_money):
             curr_bet = float(base_bet)
             loses = 0
