@@ -11,11 +11,12 @@ curr_bet = float(base_bet)
 
 side = "null"
 
-side = input("Choose your side [ct/t] ").replace("\n", "")
+side = input ("Starting bet side [t/ct] ")
 
 bet_count = 0
 curr_money = 0
 loses = 0
+change_bet = 0
 
 driver = webdriver.Firefox()
 driver.get("https://csgoempire.com/")
@@ -42,6 +43,10 @@ init_balance = float(curr_money)
 
 while True:
     time.sleep(1)
+    if(change_bet >= 3):
+        change_bet = 0
+        side = "t" if (side == "ct") else "ct"
+
     try:
         driver.find_element_by_css_selector(".rolling-indicator")
 
@@ -78,7 +83,7 @@ while True:
             print(Fore.RED + "Lost " + str(curr_bet) + Fore.RESET)
             curr_bet = float(float(curr_bet) * 2)
             loses = loses + 1
-        if (loses >= 6):
+        if (loses >= 5):
             loses = 0
             curr_bet = float(base_bet)
         curr_money = buf
@@ -91,6 +96,7 @@ while True:
         print("Finished bet")
         print("Total profit: %.2f" % float(float(curr_money) - float(init_balance)))
         print("--------------------------------------------------------------------------------")
+        change_bet += 1
         continue
 
     except Exception as identifier:
